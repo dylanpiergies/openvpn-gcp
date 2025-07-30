@@ -1,0 +1,54 @@
+package_reboot_if_required: true
+package_update: true
+package_upgrade: true
+packages:
+- apt: [openvpn]
+- apt: [iptables]
+- apt: [iptables-persistent]
+
+write_files:
+- encoding: b64
+  content: ${openvpn_server_config}
+  owner: root:root
+  path: /etc/openvpn/server/server.conf
+  permissions: '0644'
+- encoding: b64
+  content: ${openvpn_ca_cert}
+  owner: root:root
+  path: /etc/openvpn/server/ca.crt
+  permissions: '0644'
+- encoding: b64
+  content: ${openvpn_server_cert}
+  owner: root:root
+  path: /etc/openvpn/server/server.crt
+  permissions: '0644'
+- encoding: b64
+  content: ${openvpn_server_key}
+  owner: root:root
+  path: /etc/openvpn/server/server.key
+  permissions: '0600'
+- encoding: b64
+  content: ${openvpn_dh_params}
+  owner: root:root
+  path: /etc/openvpn/server/dh2048.pem
+  permissions: '0644'
+- encoding: b64
+  content: ${iptables_rules_v4}
+  owner: root:root
+  path: /etc/iptables/rules.v4
+  permissions: '0644'
+- encoding: b64
+  content: ${iptables_rules_v6}
+  owner: root:root
+  path: /etc/iptables/rules.v6
+  permissions: '0644'
+- encoding: b64
+  content: ${sysctl_conf}
+  owner: root:root
+  path: /etc/sysctl.d/99-ip-forward.conf
+  permissions: '0644'
+
+runcmd:
+  - ["sysctl", "-p", "/etc/sysctl.d/99-ip-forward.conf"]
+  - ["systemctl", "enable", "openvpn-server@server"]
+  - ["systemctl", "start", "openvpn-server@server"]
