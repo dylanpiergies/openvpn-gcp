@@ -20,11 +20,20 @@ variable "dns_managed_zone_name" {
 }
 
 variable "dns_managed_zone_dns_name" {
-  type = string
+  type     = string
+  nullable = true
+  default  = null
 }
 
 variable "dns_record_set_openvpn_dns_name" {
-  type = string
+  type     = string
+  nullable = true
+  default  = null
+}
+
+variable "dns_record_set_ttl" {
+  type    = number
+  default = 300
 }
 
 variable "firewall_allow_openvpn_cidr_ranges" {
