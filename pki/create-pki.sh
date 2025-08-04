@@ -19,7 +19,7 @@ echo "$X509_EXTENSION_CONFIG" > server.ext
 set -eux
 
 openssl genrsa -out ca.key
-openssl req -x509 -new -nodes -key ca.key -sha256 -days 3650 -out ca.crt -subj '/CN=GCP OpenVPN Root CA/'
+openssl req -x509 -new -noenc -key ca.key -sha256 -days 3650 -out ca.crt -subj '/CN=GCP OpenVPN Root CA/'
 openssl genrsa -out server.key
 openssl req -new -key server.key -out server.csr -subj '/CN=GCP OpenVPN Server/'
 openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key \
