@@ -1,7 +1,7 @@
 CLIENT_CN="$1"
 
 if [[ -z "$CLIENT_CN" ]]; then
-  echo 'No client CN supplied.'
+  echo "Usage: $0 CLIENT_CN"
   exit 1
 fi
 

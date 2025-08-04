@@ -1,7 +1,7 @@
 SERVER_DNS_NAME="$1"
 
 if [[ -z "$SERVER_DNS_NAME" ]]; then
-  echo 'No server DNS name supplied.'
+  echo "Usage: $0 SERVER_DNS_NAME"
   exit 1
 fi
 
