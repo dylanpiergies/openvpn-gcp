@@ -43,11 +43,11 @@ resource "google_compute_instance" "openvpn" {
     stack_type = "IPV4_IPV6"
 
     access_config {
-      network_tier = var.network_tier
+      network_tier = var.gce_ipv4_network_tier
     }
 
     ipv6_access_config {
-      network_tier = var.network_tier
+      network_tier = "PREMIUM"
     }
   }
 

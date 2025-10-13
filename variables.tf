@@ -56,7 +56,7 @@ variable "firewall_allow_ssh_ipv6_cidr_ranges" {
   default = ["::/0"]
 }
 
-variable "network_tier" {
+variable "gce_ipv4_network_tier" {
   type    = string
   default = "PREMIUM"
 }
