@@ -14,6 +14,11 @@ variable "gcp_zone" {
   type = string
 }
 
+variable "gce_machine_type" {
+  type    = string
+  default = "e2-micro"
+}
+
 variable "dns_managed_zone_name" {
   type    = string
   default = "openvpn"

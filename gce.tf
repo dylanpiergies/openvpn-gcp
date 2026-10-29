@@ -28,7 +28,7 @@ data "cloudinit_config" "openvpn_server" {
 resource "google_compute_instance" "openvpn" {
   project      = data.google_project.project.project_id
   name         = "openvpn"
-  machine_type = "e2-micro"
+  machine_type = var.gce_machine_type
 
   boot_disk {
     initialize_params {
