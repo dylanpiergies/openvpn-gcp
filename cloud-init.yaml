@@ -47,6 +47,11 @@ write_files:
   owner: root:root
   path: /etc/sysctl.d/99-ip-forward.conf
   permissions: '0644'
+- encoding: b64
+  content: ${apt_conf_unattended_upgrades}
+  owner: root:root
+  path: /etc/apt/apt.conf.d/50unattended-upgrades
+  permissions: '0644'
 
 runcmd:
   - ["sysctl", "-p", "/etc/sysctl.d/99-ip-forward.conf"]

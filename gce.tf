@@ -13,6 +13,7 @@ data "cloudinit_config" "openvpn_server" {
       openvpn_server_cert = base64encode(file("pki/server.crt"))
       openvpn_server_key  = base64encode(file("pki/server.key"))
       openvpn_dh_params   = base64encode(file("pki/dh2048.pem"))
+
       iptables_rules_v4 = base64encode(templatefile("etc/iptables-rules.v4", {
         openvpn_subnet_cidr = var.openvpn_subnet_cidr
       }))
@@ -20,6 +21,8 @@ data "cloudinit_config" "openvpn_server" {
         openvpn_subnet_ipv6_cidr = var.openvpn_subnet_ipv6_cidr
       }))
       sysctl_conf = base64encode(file("etc/sysctl.conf"))
+
+      apt_conf_unattended_upgrades = base64encode(file("etc/apt.conf.unattended-upgrades"))
     })
     filename = "cloud-init.yaml"
   }
