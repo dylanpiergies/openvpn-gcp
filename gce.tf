@@ -5,7 +5,7 @@ data "cloudinit_config" "openvpn_server" {
   part {
     content_type = "text/cloud-config"
     content = templatefile("cloud-init.yaml", {
-      openvpn_server_config = base64encode(templatefile("openvpn-server.conf", {
+      openvpn_server_config = base64encode(templatefile("etc/openvpn-server.conf", {
         openvpn_subnet_cidr      = var.openvpn_subnet_cidr
         openvpn_subnet_ipv6_cidr = var.openvpn_subnet_ipv6_cidr
       }))
@@ -13,13 +13,13 @@ data "cloudinit_config" "openvpn_server" {
       openvpn_server_cert = base64encode(file("pki/server.crt"))
       openvpn_server_key  = base64encode(file("pki/server.key"))
       openvpn_dh_params   = base64encode(file("pki/dh2048.pem"))
-      iptables_rules_v4 = base64encode(templatefile("iptables-rules.v4", {
+      iptables_rules_v4 = base64encode(templatefile("etc/iptables-rules.v4", {
         openvpn_subnet_cidr = var.openvpn_subnet_cidr
       }))
-      iptables_rules_v6 = base64encode(templatefile("iptables-rules.v6", {
+      iptables_rules_v6 = base64encode(templatefile("etc/iptables-rules.v6", {
         openvpn_subnet_ipv6_cidr = var.openvpn_subnet_ipv6_cidr
       }))
-      sysctl_conf = base64encode(file("sysctl.conf"))
+      sysctl_conf = base64encode(file("etc/sysctl.conf"))
     })
     filename = "cloud-init.yaml"
   }
