@@ -32,7 +32,7 @@ resource "google_compute_instance" "openvpn" {
 
   boot_disk {
     initialize_params {
-      image = "ubuntu-minimal-2404-lts-amd64"
+      image = "ubuntu-minimal-2604-lts-amd64"
     }
   }
 
